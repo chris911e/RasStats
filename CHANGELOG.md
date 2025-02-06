@@ -1,6 +1,6 @@
 # 📓 Changelog
 
-Versioning follow following syntax:
+Versioning follows following syntax:
 
 | Type | Syntax |
 | ------- | ----------- |
