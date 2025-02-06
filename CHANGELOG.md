@@ -4,8 +4,8 @@ Versioning follows following syntax:
 
 | Type | Syntax |
 | ------- | ----------- |
- 🚀: Major release | **v1.0.0**  |
- 🎯: Minor release | **v0.1.0**  |
+ 🚀 Major release | **v1.0.0**  |
+ 🎯 Minor release | **v0.1.0**  |
  ⚙️ Patch release | **v0.0.1**  |
 
 ---
