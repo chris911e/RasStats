@@ -27,11 +27,13 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer conn.Close()
 
-	var stats sys.RPInfo
-
 	for {
-		sys.FetchSystemStats(&stats)
-		err := conn.WriteMessage(websocket.TextMessage, []byte("Hello there"))
+		rpInfo, err := sys.FetchSystemStats()
+		if err != nil {
+			break
+		}
+
+		err = conn.WriteJSON(rpInfo)
 		if err != nil {
 			fmt.Println("Write error:", err)
 			break
