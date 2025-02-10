@@ -2,6 +2,7 @@ package sys
 
 import(
 	"rasstats/websocket/sys/collector"
+	"fmt"
 )
 
 func FetchSystemStats() (RPInfo, error) {
@@ -10,6 +11,13 @@ func FetchSystemStats() (RPInfo, error) {
 	if err != nil {
 		return RPInfo{}, err
 	}
+
+	gopsutil, err := collector.PsutilSysInfo()
+	if err != nil {
+		return RPInfo{}, err
+	}
+
+	fmt.Println(gopsutil)
 
 	var rpInfo RPInfo = RPInfo{
 		General: General{
