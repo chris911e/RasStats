@@ -6,8 +6,7 @@ import(
 	"os"
 )
 
-// change num inside of [] to alter num of ints
-func SysInfoUnix() ([]int, error) {
+func GeneralSystemInfo() ([]int, error) {
 
 	// Sysinfo_t
 	var general unix.Sysinfo_t
@@ -17,6 +16,15 @@ func SysInfoUnix() ([]int, error) {
 		return nil, err
 	}
 
+	return []int{
+		int(general.Uptime),
+		int(general.Totalram),
+		int(general.Freeram),
+		int(general.Procs),
+	}, nil
+}
+
+func DiskInfo() ([]int, error) {
 	wd, err := os.Getwd()
 	if err != nil {
 		fmt.Println("Failed getting wd:", err)
@@ -32,11 +40,6 @@ func SysInfoUnix() ([]int, error) {
 	}
 
 	return []int{
-		int(general.Uptime),
-		int(general.Totalram),
-		int(general.Freeram),
-		int(general.Procs),
-
 		int(disk.Type),
 		int(disk.Bsize),
 		int(disk.Blocks),
