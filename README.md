@@ -29,7 +29,7 @@ type Disk struct {
 ```
 ```go
 type CPU struct {
-	CPU			int32		`json:"cpu"`
+	CPU         int32       `json:"cpu"`
 	Family		string		`json:"family"`
 	Model		string		`json:"model"`
 	CacheSize	int32		`json:"cacheSize"`
