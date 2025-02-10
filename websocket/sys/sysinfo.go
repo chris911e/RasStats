@@ -7,9 +7,14 @@ import(
 
 func FetchSystemStats() (RPInfo, error) {
 
-	unix, err := collector.SysInfoUnix()
+	general, err := collector.GeneralSystemInfo()
 	if err != nil {
 		return RPInfo{}, err
+	}
+
+	disk, err := collector.DiskInfo()
+	if err != nil {
+		return  RPInfo{}, err
 	}
 
 	gopsutil, err := collector.PsutilSysInfo()
@@ -21,21 +26,21 @@ func FetchSystemStats() (RPInfo, error) {
 
 	var rpInfo RPInfo = RPInfo{
 		General: General{
-			Uptime: unix[0],
-			Procs: unix[3],
+			Uptime: general[0],
+			Procs: general[3],
 		},
 		RAM: RAM{
-			Totalram: unix[1],
-			Freeram: unix[2],
+			Totalram: general[1],
+			Freeram: general[2],
 		},
 		Disk: Disk{
-			Type: unix[4],
-			Bsize: unix[5],
-			Blocks: unix[6],
-			Bfree: unix[7],
-			Bavail: unix[8],
-			Files: unix[9],
-			Ffree: unix[10],
+			Type: disk[4],
+			Bsize: disk[5],
+			Blocks: disk[6],
+			Bfree: disk[7],
+			Bavail: disk[8],
+			Files: disk[9],
+			Ffree: disk[10],
 		},
 	}
 
