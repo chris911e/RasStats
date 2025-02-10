@@ -10,6 +10,16 @@ Versioning follows following syntax:
 
 ---
 
+## 🎯 v0.2.0 - Websockets Refactor
+- Renamed rastats-ui to rs-client
+- Refactored websocket codebase
+  - gopsutil pkg migration
+  - common origin for structs to prevent import cycle
+  - future-proof folder structure
+- Added CPU/Disk/General(Host) data to return
+
+**📅 10.02.2025**
+
 ## ⚙️ v0.1.1 - Websockets
 - Migrated onto Golang
 - Setup conn + tested with wscat

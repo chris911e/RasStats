@@ -1,24 +1,39 @@
-# RasStats - Monitor your Raspberry PI!!!
+# RasStats - Monitor your Raspberry PI
+
+Little project made for my RaspberryPi at home.
 
 ## Current supported Statistics
-- Uptime
-- Total RAM
-- Free RAM
-- Amount of ongoing Processes
-- Disk Type
-- Block Size: Size of individual storage blocks
-- Blocks: Total number of blocks
-- Free Blocks : Free, including reserved for system
-- Available Blocks: Blocks for users
-- Files: Number of inodes
-- Free Files: Number of free inodes
+These are just chosen stats from structs of gopsutil to fit my own needs.
 
-## Planned Statistics
-- CPU Usage
-- CPU Temperature
-- Load Average
-- Network Traffice
-- Power Voltage & Throttling
-- IP Addresses
-- Ping & Latency Check
-- Firewall & Open Ports Check
+If you need to adjust this, refer to the official docs of gopsutil to see all available stats and change as needed.
+
+
+```go
+type General struct {
+	Hostname	string		`json:"hostname"`
+	Uptime		uint64		`json:"uptime"`
+	BootTime	uint64		`json:"bootTime"`
+	Procs		uint64		`json:"procs"`	
+	KernelArch	string		`json:"kernelArch"`
+}
+```
+```go
+type Disk struct {
+	Path		string		`json:"path"`
+	Fstype		string		`json:"fstype"`
+	Total		uint64		`json:"total"`
+	Free		uint64		`json:"free"`
+	Used		uint64		`json:"used"`
+	UsedPercent	float64		`json:"usedPercent"`
+}
+```
+```go
+type CPU struct {
+	CPU			int32		`json:"cpu"`
+	Family		string		`json:"family"`
+	Model		string		`json:"model"`
+	CacheSize	int32		`json:"cacheSize"`
+}
+```
+
+> **NOTE:** as of now, when changing the struct under ``structs/data.go``, it does <u>**NOT**</u> dynamically change the return websocket data.
