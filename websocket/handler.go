@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"time"
 	"sync"
+	"time"
 
 	"github.com/gorilla/websocket"
 	"rasstats/websocket/sys"
