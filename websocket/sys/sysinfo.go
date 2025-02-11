@@ -22,10 +22,16 @@ func FetchSystemStats() (structs.RPInfo, error) {
 		return structs.RPInfo{}, err
 	}
 
+	mem, err := collector.MEMInfo()
+	if err != nil {
+		return structs.RPInfo{}, err
+	}
+
 	rpInfo := structs.RPInfo{
 		General: host,
 		Disk: disk,
 		CPU: cpu,
+		Memoery: mem,
 	}
 
 	return rpInfo, nil
