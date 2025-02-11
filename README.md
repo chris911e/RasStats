@@ -53,4 +53,15 @@ type Sensor struct {
 }
 ```
 
-> **NOTE:** as of now, when changing the struct under ``structs/data.go``, it does <u>**NOT**</u> dynamically change the return websocket data.
+> **NOTE:** when changing the struct under ``structs/data.go``, it does <u>**NOT**</u> dynamically change the return websocket data.
+
+## Planned Features
+- Detailed overview of process
+  - List of processes
+  - Description/Lifetime/Rules/Ports
+- Detailed overview of network
+  - Incoming and Outgoing traffic
+  - Firewall rules
+  - Open Ports
+- Alerting
+- Logging
