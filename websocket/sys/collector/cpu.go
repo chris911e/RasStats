@@ -44,5 +44,4 @@ func MultiCPUInfo() ([]structs.CPU, error) {
 	}
 
 	return cCPUs, nil
-
 }
