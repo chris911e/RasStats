@@ -22,7 +22,7 @@ Versioning follows following syntax:
   - Reading messages with timeout
   - Channel management synced for closing
 
-**📅 12.02.2025**
+**📅 11.02.2025**
 
 ## ⚙️ v0.1.3 - Memory & Sensor
 - Added Memory data to return
