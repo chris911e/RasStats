@@ -9,6 +9,21 @@ Versioning follows following syntax:
  ⚙️ Patch release | **v0.0.1**  |
 
 ---
+## 🎯 v0.2.0 - RS Client + Server Connection Handling
+- Added Main Page of RS Client
+  - Currently supported stats integrated
+  - React Router v6 Integration
+  - Websocket Context for websocket connection handling
+  - New Icon for RasStats
+  - Header
+- Refactored Server connection handling
+  - Pong Handler for Receiving
+  - Ping Handler for Sending
+  - Reading messages with timeout
+  - Channel management synced for closing
+
+**📅 12.02.2025**
+
 ## ⚙️ v0.1.3 - Memory & Sensor
 - Added Memory data to return
 - Added Sensor data to return
