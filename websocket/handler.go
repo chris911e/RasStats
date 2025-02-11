@@ -1,50 +1,89 @@
 package main
 
-import(
-	"net/http"
+import (
 	"fmt"
-	"github.com/gorilla/websocket"
+	"net/http"
 	"time"
+	"sync"
 
+	"github.com/gorilla/websocket"
 	"rasstats/websocket/sys"
 )
 
 var upgrader = websocket.Upgrader{
-	ReadBufferSize:		1024,
-	WriteBufferSize:	1024,
-	CheckOrigin: func(r *http.Request) bool {
-		fmt.Println("Attempted Connection:", r.RemoteAddr)
-		return true
-	},
+	CheckOrigin: func(r *http.Request) bool { return true },
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		fmt.Println(err)
-
+		fmt.Println("Upgrade error:", err)
+		return
 	}
 	defer conn.Close()
 
+	done := make(chan struct{})
+	var once sync.Once
+
+	fmt.Println("Client connected:", r.RemoteAddr)
+
+	conn.SetPongHandler(func(appData string) error {
+		fmt.Println("Pong received")
+		conn.SetReadDeadline(time.Now().Add(2 * time.Second))
+		return nil
+	})
+
+	go func() {
+		select {
+		case <-done:
+			return
+		default:
+			for {
+				_, _, err := conn.ReadMessage()
+				if err != nil {
+					fmt.Println("Client disconnected:", err)
+					once.Do(func() { close(done) })
+					return
+				}
+			}
+		}
+	}()
+
+	go func() {
+		select {
+		case <-done:
+			return
+		default:
+			for {
+				time.Sleep(1 * time.Second)
+				err := conn.WriteMessage(websocket.PingMessage, nil)
+				if err != nil {
+					once.Do(func() { close(done) })
+					return
+				}
+			}
+		}
+	}()
+
 	for {
-		rpInfo, err := sys.FetchSystemStats()
-		if err != nil {
-			break
-		}
+		select {
+		case <-done:
+			fmt.Println("Client disconnected:", r.RemoteAddr)
+			return
+		default:
+			rpInfo, err := sys.FetchSystemStats()
+			if err != nil {
+				fmt.Println("Fetch error:", err)
+				return
+			}
 
-		err = conn.WriteJSON(rpInfo)
-		if err != nil {
-			fmt.Println("Write error:", err)
-			break
-		}
+			err = conn.WriteJSON(rpInfo)
+			if err != nil {
+				fmt.Println("Write error:", err)
+				return
+			}
 
-		err = conn.WriteMessage(websocket.PingMessage, nil)
-		if err != nil {
-			fmt.Println("Ping Failed:", err)
-			break
+			time.Sleep(1 * time.Second)
 		}
-
-		time.Sleep(1 * time.Second)
 	}
 }
