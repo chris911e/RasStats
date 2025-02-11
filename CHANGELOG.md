@@ -9,13 +9,13 @@ Versioning follows following syntax:
  ⚙️ Patch release | **v0.0.1**  |
 
 ---
-## ⚙️ v0.2.1 - Memory & Sensor
+## ⚙️ v0.1.3 - Memory & Sensor
 - Added Memory data to return
 - Added Sensor data to return
 
 **📅 11.02.2025**
 
-## 🎯 v0.2.0 - Websockets Refactor
+## ⚙️ v0.1.2 - Websockets Refactor
 - Renamed rastats-ui to rs-client
 - Refactored websocket codebase
   - gopsutil pkg migration
