@@ -35,5 +35,14 @@ type CPU struct {
 	CacheSize	int32		`json:"cacheSize"`
 }
 ```
+```go
+type Memory struct {
+	Total		uint64		`json:"total"`
+	Available	uint64		`json:"available"`
+	Used		uint64		`json:"used"`
+	UsedPercent	float64		`json:"usedPercent"`
+	Free		uint64		`json:"free"`
+}
+```
 
 > **NOTE:** as of now, when changing the struct under ``structs/data.go``, it does <u>**NOT**</u> dynamically change the return websocket data.
