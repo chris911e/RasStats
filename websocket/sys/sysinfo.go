@@ -27,11 +27,17 @@ func FetchSystemStats() (structs.RPInfo, error) {
 		return structs.RPInfo{}, err
 	}
 
+	sensors, err := collector.SensorTemperature()
+	if err != nil {
+		return structs.RPInfo{}, err
+	}
+
 	rpInfo := structs.RPInfo{
 		General: host,
 		Disk: disk,
 		CPU: cpu,
-		Memoery: mem,
+		Memory: mem,
+		Sensor: sensors,
 	}
 
 	return rpInfo, nil

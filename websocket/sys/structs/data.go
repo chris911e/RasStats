@@ -32,9 +32,17 @@ type Memory struct {
 	Free		uint64		`json:"free"`
 }
 
+type Sensor struct {
+	SensorKey	string		`json:"sensorKey"`
+	Temperature	float64		`json:"temperature"`
+	High		float64		`json:"sensorHigh"`
+	Critical	float64		`json:"sensorCritical"`
+}
+
 type RPInfo struct {
 	General		General 	`json:"general"`
 	Disk		Disk		`json:"disk"`
 	CPU			CPU			`json:"cpu"`
-	Memoery		Memory		`json:"memory"`
+	Memory		Memory		`json:"memory"`
+	Sensor		[]Sensor	`json:"sensor"`
 }
