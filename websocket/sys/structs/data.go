@@ -24,8 +24,17 @@ type CPU struct {
 	CacheSize	int32		`json:"cacheSize"`
 }
 
+type Memory struct {
+	Total		uint64		`json:"total"`
+	Available	uint64		`json:"available"`
+	Used		uint64		`json:"used"`
+	UsedPercent	float64		`json:"usedPercent"`
+	Free		uint64		`json:"free"`
+}
+
 type RPInfo struct {
 	General		General 	`json:"general"`
 	Disk		Disk		`json:"disk"`
 	CPU			CPU			`json:"cpu"`
+	Memoery		Memory		`json:"memory"`
 }
