@@ -44,5 +44,13 @@ type Memory struct {
 	Free		uint64		`json:"free"`
 }
 ```
+```go
+type Sensor struct {
+	SensorKey	string		`json:"sensorKey"`
+	Temperature	float64		`json:"temperature"`
+	High		float64		`json:"sensorHigh"`
+	Critical	float64		`json:"sensorCritical"`
+}
+```
 
 > **NOTE:** as of now, when changing the struct under ``structs/data.go``, it does <u>**NOT**</u> dynamically change the return websocket data.
