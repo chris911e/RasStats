@@ -19,6 +19,8 @@ function App() {
     }
   }, [ws])
 
+  useEffect(() => { console.log(stats?.cpu.mhz) }, [stats])
+
   return (
 
     <div>
@@ -29,7 +31,7 @@ function App() {
           </div>
         ) : (
           <div className='flex justify-center items-center h-screen text-3xl text-gray-200 font-bold'>
-            {}
+            {Math.floor(stats.memory.usedPercent * 100) / 100}%
           </div>
         )
       }
