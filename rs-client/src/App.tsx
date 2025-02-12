@@ -30,8 +30,15 @@ function App() {
             <img src="/loading.svg" alt="Data Loading" height={50} width={50} />
           </div>
         ) : (
-          <div className='flex justify-center items-center h-screen text-3xl text-gray-200 font-bold'>
-            {Math.floor(stats.memory.usedPercent * 100) / 100}%
+          <div className='p-16'>
+            <div id='general' className='bg-gray-200/50 p-5 grid grid-cols-2'>
+              <div>
+                Memory Usage:
+              </div>
+              <div>
+                {Math.floor(stats.memory.usedPercent*100)/100}%
+              </div>
+            </div>
           </div>
         )
       }
