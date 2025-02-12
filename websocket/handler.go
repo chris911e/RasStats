@@ -28,7 +28,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Client connected:", r.RemoteAddr)
 
 	conn.SetPongHandler(func(appData string) error {
-		fmt.Println("Pong received")
 		conn.SetReadDeadline(time.Now().Add(2 * time.Second))
 		return nil
 	})
@@ -41,7 +40,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			for {
 				_, _, err := conn.ReadMessage()
 				if err != nil {
-					fmt.Println("Client disconnected:", err)
 					once.Do(func() { close(done) })
 					return
 				}
