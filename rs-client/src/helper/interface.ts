@@ -16,10 +16,11 @@ interface Disk {
 }
 
 interface CPU {
-    cpu: number;
+    vendorId: string;
     family: string;
-    model: string;
+    modelName: string;
     cacheSize: number;
+    mhz: number;
 }
 
 interface Memory {
