@@ -19,7 +19,7 @@ export default function Header() {
                         </span>
                     </Link>
                 </div>
-                <div className="col-span-3 grid-cols-3 hidden sm:grid">
+                <div className="col-span-3 grid-cols-3 hidden md:grid">
                     <div className="text-black/50">
                         Processes
                     </div>
@@ -30,7 +30,7 @@ export default function Header() {
                         Alerting
                     </div>
                 </div>
-                <div className="col-span-3 sm:hidden">
+                <div className="col-span-3 md:hidden">
                     <div className="text-black/50 flex justify-end">
                         <div 
                             className="rounded-full hover:bg-gray-500/30 cursor-pointer p-1"
@@ -45,7 +45,7 @@ export default function Header() {
                 {
                     menuModal && (
                         <div className="fixed inset-0" onClick={() => setMenuModal(false)}>
-                            <div className="fixed top-20 right-3 sm:hidden bg-gray-200 rounded-sm p-3 z-10" onClick={(e) => e.stopPropagation()}>
+                            <div className="fixed top-20 right-3 md:hidden bg-gray-200 rounded-sm p-3 z-10" onClick={(e) => e.stopPropagation()}>
                                 <div
                                     className="
                                         absolute 
