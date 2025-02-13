@@ -58,7 +58,7 @@ export default function Header() {
                                         border-b-gray-200" 
                                 />
                                 <div className="flex flex-col gap-3 text-lg w-35">
-                                    <div className="grid grid-cols-3 hover:bg-gray-300 rounded-lg cursor-pointer p-2">
+                                    <div className="grid grid-cols-3 hover:bg-gray-500/30 rounded-lg cursor-pointer p-2">
                                         <div className="">
                                             <img src="/gear.svg" alt="gear" height={25} width={25} />
                                         </div>
@@ -67,7 +67,7 @@ export default function Header() {
                                         </div>
                                     </div>
                                     <div className="bg-black h-px" />
-                                    <div className="grid grid-cols-3 hover:bg-gray-300 rounded-lg cursor-pointer p-2">
+                                    <div className="grid grid-cols-3 hover:bg-gray-500/30 rounded-lg cursor-pointer p-2">
                                         <div>
                                             <img src="/network.svg" alt="gear" height={25} width={25} />
                                         </div>
@@ -76,7 +76,7 @@ export default function Header() {
                                         </div>
                                     </div>
                                     <div className="bg-black h-px" />
-                                    <div className="grid grid-cols-3 hover:bg-gray-300 rounded-lg cursor-pointer p-2">
+                                    <div className="grid grid-cols-3 hover:bg-gray-500/30 rounded-lg cursor-pointer p-2">
                                         <div>
                                             <img src="/alerting.svg" alt="gear" height={30} width={30} />
                                         </div>
