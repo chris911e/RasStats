@@ -2,7 +2,7 @@ interface General {
     hostname: string;
     uptime: number;
     bootTime: number;
-    porcs: number;
+    procs: number;
     kernelArch: number;
 }
 
