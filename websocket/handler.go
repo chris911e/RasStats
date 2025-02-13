@@ -8,10 +8,20 @@ import (
 
 	"github.com/gorilla/websocket"
 	"rasstats/websocket/sys"
+	"rasstats/websocket/sys/structs"
 )
 
 var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool { return true },
+}
+
+var wsMutex sync.Mutex
+
+func safeWriteJSON(conn *websocket.Conn, data structs.RPInfo) error {
+	wsMutex.Lock()
+	defer wsMutex.Unlock()
+
+	return conn.WriteJSON(data)
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
@@ -28,7 +38,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Client connected:", r.RemoteAddr)
 
 	conn.SetPongHandler(func(appData string) error {
-		conn.SetReadDeadline(time.Now().Add(2 * time.Second))
+		conn.SetReadDeadline(time.Now().Add(5 * time.Second))
 		return nil
 	})
 
@@ -75,7 +85,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			err = conn.WriteJSON(rpInfo)
+			err = safeWriteJSON(conn, rpInfo)
 			if err != nil {
 				fmt.Println("Write error:", err)
 				return
