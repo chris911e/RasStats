@@ -39,7 +39,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Client connected:", r.RemoteAddr)
 
 	conn.SetPongHandler(func(appData string) error {
-		conn.SetReadDeadline(time.Now().Add(5 * time.Second))
+		conn.SetReadDeadline(time.Now().Add(3 * time.Second))
 		return nil
 	})
 
