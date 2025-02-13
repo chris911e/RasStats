@@ -28,6 +28,7 @@ interface Memory {
     available: number;
     used: number;
     usedPercent: number;
+    free: number;
 }
 
 interface Sensor {
