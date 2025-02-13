@@ -33,6 +33,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	defer conn.Close()
 
 	done := make(chan struct{})
+	msg := make(chan structs.RPInfo)
 	var once sync.Once
 
 	fmt.Println("Client connected:", r.RemoteAddr)
@@ -73,6 +74,21 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
+	go func() {
+		for {
+			select {
+			case <-done:
+				return
+			case data := <-msg:
+				if err := safeWriteJSON(conn, data); err != nil {
+					fmt.Println("Write error:", err)
+					once.Do(func() { close(done) })
+					return
+				}
+			}
+		}
+	}()
+
 	for {
 		select {
 		case <-done:
@@ -85,11 +101,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			err = safeWriteJSON(conn, rpInfo)
-			if err != nil {
-				fmt.Println("Write error:", err)
-				return
-			}
+			msg <- rpInfo
 
 			time.Sleep(1 * time.Second)
 		}
