@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useWebSocket } from './components/WebSocketProvider'
 import { PieChart, Pie, Cell } from 'recharts'
 
+
 import RPInfo from './helper/interface'
 
 interface LegendData {
@@ -85,6 +86,10 @@ function App() {
     return `${temp.toFixed(1)}°C`
   }
 
+  const convertGb = (mem: number): string => {
+    return (mem/(1024 * 1024 * 1024)).toFixed(2)
+  }
+
   return (
 
     <div>
@@ -95,8 +100,8 @@ function App() {
           </div>
         ) : (
           <div className='pt-4'>
-            <div className='p-5 grid grid-cols-3 gap-5'>
-              <div className='col-span-3 md:col-span-1 bg-gray-500/20'>
+            <div className='p-5 grid grid-cols-4 gap-5'>
+              <div className='col-span-4 md:col-span-2 lg:col-span-1 bg-gray-500/20'>
                 <div className='text-xl bg-white'>
                   <span className='font-bold'>General</span> <span className='text-sm'>(Raspberry Pi 4)</span>
                 </div>
@@ -137,7 +142,7 @@ function App() {
                   </div>
                 </div>
               </div>
-              <div className='col-span-3 md:col-span-1 bg-gray-500/20'>
+              <div className='col-span-4 md:col-span-2 lg:col-span-1 bg-gray-500/20'>
                 <div className='text-xl bg-white'>
                   <span className='font-bold'>CPU</span> <span className='text-sm'>({stats.cpu.modelName})</span>
                 </div>
@@ -176,12 +181,66 @@ function App() {
                   </div>
                 </div>
               </div>
-              <div className='col-span-3 md:col-span-1 bg-gray-500/20'>
+              <div className='col-span-4 md:col-span-2 lg:col-span-1 bg-gray-500/20'>
                 <div className='text-xl bg-white'>
-                  Other
+                <span className='font-bold'>Memory</span> <span className='text-sm'>({convertGb(stats.memory.total)} GB)</span>
                 </div>
-                <div className='p-5'>
-                  
+                <div className='p-5 grid grid-rows-5'>
+                  <div className='row-span-3 flex justify-center items-center text-5xl font-bold flex-col'>
+                    <div className={stats.memory.usedPercent < 70 ? 'text-green-600/90' : stats.memory.usedPercent < 85 ? 'text-yellow-600/70' : 'text-red-600/50'}>
+                      {(stats.memory.usedPercent).toFixed(2)}%
+                    </div>
+                    <div className='text-sm text-black/50'>
+                      used
+                    </div>
+                  </div>
+                  <div>
+                    <div className='font-bold'>
+                      Available Memory
+                    </div>
+                    <div>
+                      {convertGb(stats.memory.available)} GB
+                    </div>
+                  </div>
+                  <div>
+                    <div className='font-bold'>
+                      Free Memory
+                    </div>
+                    <div>
+                      {convertGb(stats.memory.free)} GB
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='col-span-4 md:col-span-2 lg:col-span-1 bg-gray-500/20'>
+                <div className='text-xl bg-white'>
+                <span className='font-bold'>Disk</span> <span className='text-sm'>({stats.disk.path})</span>
+                </div>
+                <div className='p-5 grid grid-rows-5'>
+                  <div className='row-span-3 flex justify-center items-center text-4xl font-bold flex-col'>
+                    <div>
+                      {(convertGb(stats.disk.used))} GB
+                    </div>
+                    <div className='text-sm text-black/50'>
+                      /{(convertGb(stats.disk.total))} GB
+                    </div>
+                  </div>
+                  <div>
+                    <div className='font-bold'>
+                      Used in Percent
+                    </div>
+                    <div>
+                      {(stats.disk.usedPercent).toFixed(2)}%
+                    </div>
+                  </div>
+                  <div>
+                    <div className='font-bold'>
+                      Filesystem type
+                    </div>
+                    <div>
+                      {stats.disk.fstype}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
