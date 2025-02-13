@@ -95,79 +95,94 @@ function App() {
           </div>
         ) : (
           <div className='pt-4'>
-            <div id='general' className='p-5 grid grid-cols-3 gap-5'>
-              <div className='grid grid-cols-2 bg-gray-500/20 p-5 col-span-3 md:col-span-1'>
-                <div>
-                  <div className='font-bold'>
-                    Hostname:
-                  </div>
-                  <div className='font-bold'>
-                    Uptime:
-                  </div>
-                  <div className='font-bold'>
-                    Boot Date:
-                  </div>
-                  <div className='font-bold'>
-                    Processes:
-                  </div>
-                  <div className='font-bold'>
-                    Kernel Arch:
-                  </div>
+            <div className='p-5 grid grid-cols-3 gap-5'>
+              <div className='col-span-3 md:col-span-1 bg-gray-500/20'>
+                <div className='text-xl bg-white'>
+                  General
                 </div>
-                <div>
-                  <div>
-                    {stats.general.hostname}
-                  </div>
-                  <div>
-                    {convertTime(stats.general.uptime)}
-                  </div>
-                  <div>
-                    {convertDate(stats.general.bootTime)}
-                  </div>
-                  <div>
-                    {stats.general.procs}
-                  </div>
-                  <div>
-                    {stats.general.kernelArch}
-                  </div>
-                </div>
-              </div>
-              <div className='bg-gray-500/20 p-5 col-span-3 md:col-span-1'>
-                <div className='grid grid-cols-2'>
-                  <div>
-                    <span className='font-bold'>CPU Model:</span> {stats.cpu.modelName}
-                  </div>
-                  <div>
-                    <span className='font-bold'>Vendor:</span> {stats.cpu.vendorId}
-                  </div>
-                    <div className='col-span-2 flex flex-col items-center'>
-                      <PieChart width={200} height={160}>
-                        <Pie
-                        dataKey="value"
-                        startAngle={180}
-                        endAngle={0}
-                        data={data}
-                        cx={cx}
-                        cy={cy}
-                        innerRadius={iR}
-                        outerRadius={oR}
-                        fill="#8884d8"
-                        stroke="none"
-                        >
-                        {data.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                        </Pie>
-                        {needle(stats.sensor[0].temperature, data, cx, cy, iR, oR, '#d0d000')}
-                      </PieChart>
-                      <div className='text-xl font-bold'>
-                        {convertTemp(stats.sensor[0].temperature)}
-                      </div>
+                <div className='grid grid-cols-2 p-5 md:h-full'>
+                  <div className='grid grid-rows-5'>
+                    <div className='font-bold'>
+                      Hostname:
                     </div>
+                    <div className='font-bold'>
+                      Uptime:
+                    </div>
+                    <div className='font-bold'>
+                      Boot Date:
+                    </div>
+                    <div className='font-bold'>
+                      Processes:
+                    </div>
+                    <div className='font-bold'>
+                      Kernel Arch:
+                    </div>
+                  </div>
+                  <div className='grid grid-rows-5'>
+                    <div>
+                      {stats.general.hostname}
+                    </div>
+                    <div>
+                      {convertTime(stats.general.uptime)}
+                    </div>
+                    <div>
+                      {convertDate(stats.general.bootTime)}
+                    </div>
+                    <div>
+                      {stats.general.procs}
+                    </div>
+                    <div>
+                      {stats.general.kernelArch}
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className='bg-gray-500/20 p-5 col-span-3 md:col-span-1'>
-                
+              <div className='col-span-3 md:col-span-1 bg-gray-500/20'>
+                <div className='text-xl bg-white'>
+                  CPU
+                </div>
+                <div className='p-5'>
+                  <div className='grid grid-cols-2'>
+                    <div>
+                      <span className='font-bold'>Model:</span> {stats.cpu.modelName}
+                    </div>
+                    <div>
+                      <span className='font-bold'>Vendor:</span> {stats.cpu.vendorId}
+                    </div>
+                      <div className='col-span-2 flex flex-col items-center'>
+                        <PieChart width={200} height={160}>
+                          <Pie
+                            dataKey="value"
+                            startAngle={180}
+                            endAngle={0}
+                            data={data}
+                            cx={cx}
+                            cy={cy}
+                            innerRadius={iR}
+                            outerRadius={oR}
+                            fill="#8884d8"
+                            stroke="none"
+                          >
+                            {data.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={entry.color} />
+                            ))}
+                          </Pie>
+                          {needle(stats.sensor[0].temperature, data, cx, cy, iR, oR, '#d0d000')}
+                        </PieChart>
+                        <div className='text-xl font-bold'>
+                          {convertTemp(stats.sensor[0].temperature)}
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div className='col-span-3 md:col-span-1 bg-gray-500/20'>
+                <div className='text-xl bg-white'>
+                  Other
+                </div>
+                <div className='p-5'>
+                  
+                </div>
               </div>
             </div>
           </div>
