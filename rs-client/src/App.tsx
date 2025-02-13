@@ -98,7 +98,7 @@ function App() {
             <div className='p-5 grid grid-cols-3 gap-5'>
               <div className='col-span-3 md:col-span-1 bg-gray-500/20'>
                 <div className='text-xl bg-white'>
-                  General
+                  <span className='font-bold'>General</span> <span className='text-sm'>(Raspberry Pi 4)</span>
                 </div>
                 <div className='grid grid-cols-2 p-5 md:h-full'>
                   <div className='grid grid-rows-5'>
@@ -139,12 +139,12 @@ function App() {
               </div>
               <div className='col-span-3 md:col-span-1 bg-gray-500/20'>
                 <div className='text-xl bg-white'>
-                  CPU
+                  <span className='font-bold'>CPU</span> <span className='text-sm'>({stats.cpu.modelName})</span>
                 </div>
                 <div className='p-5'>
                   <div className='grid grid-cols-2'>
                     <div>
-                      <span className='font-bold'>Model:</span> {stats.cpu.modelName}
+                      <span className='font-bold'>Mhz:</span> {stats.cpu.mhz}
                     </div>
                     <div>
                       <span className='font-bold'>Vendor:</span> {stats.cpu.vendorId}
