@@ -45,7 +45,7 @@ export default function Header() {
                 {
                     menuModal && (
                         <div className="fixed inset-0" onClick={() => setMenuModal(false)}>
-                            <div className="fixed top-20 right-3 md:hidden bg-gray-200 rounded-sm p-3 z-10" onClick={(e) => e.stopPropagation()}>
+                            <div className="fixed top-20 right-3 md:hidden bg-gray-200 rounded-sm p-3 z-15" onClick={(e) => e.stopPropagation()}>
                                 <div
                                     className="
                                         absolute 
