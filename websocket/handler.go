@@ -8,10 +8,20 @@ import (
 
 	"github.com/gorilla/websocket"
 	"rasstats/websocket/sys"
+	"rasstats/websocket/sys/structs"
 )
 
 var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool { return true },
+}
+
+var wsMutex sync.Mutex
+
+func safeWriteJSON(conn *websocket.Conn, data structs.RPInfo) error {
+	wsMutex.Lock()
+	defer wsMutex.Unlock()
+
+	return conn.WriteJSON(data)
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
@@ -23,13 +33,13 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	defer conn.Close()
 
 	done := make(chan struct{})
+	msg := make(chan structs.RPInfo)
 	var once sync.Once
 
 	fmt.Println("Client connected:", r.RemoteAddr)
 
 	conn.SetPongHandler(func(appData string) error {
-		fmt.Println("Pong received")
-		conn.SetReadDeadline(time.Now().Add(2 * time.Second))
+		conn.SetReadDeadline(time.Now().Add(3 * time.Second))
 		return nil
 	})
 
@@ -41,7 +51,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			for {
 				_, _, err := conn.ReadMessage()
 				if err != nil {
-					fmt.Println("Client disconnected:", err)
 					once.Do(func() { close(done) })
 					return
 				}
@@ -65,6 +74,21 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
+	go func() {
+		for {
+			select {
+			case <-done:
+				return
+			case data := <-msg:
+				if err := safeWriteJSON(conn, data); err != nil {
+					fmt.Println("Write error:", err)
+					once.Do(func() { close(done) })
+					return
+				}
+			}
+		}
+	}()
+
 	for {
 		select {
 		case <-done:
@@ -77,11 +101,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			err = conn.WriteJSON(rpInfo)
-			if err != nil {
-				fmt.Println("Write error:", err)
-				return
-			}
+			msg <- rpInfo
 
 			time.Sleep(1 * time.Second)
 		}

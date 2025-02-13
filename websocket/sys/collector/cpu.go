@@ -14,27 +14,28 @@ func SingleCPUInfo() (structs.CPU, error) {
 	}
 
 	cCPU := structs.CPU{
-		CPU: c[0].CPU,
+		VendorID: c[0].VendorID,
 		Family: c[0].Family,
-		Model: c[0].Model,
+		ModelName: c[0].ModelName,
 		CacheSize: c[0].CacheSize,
+		Mhz: c[0].Mhz,
 	}
 
 	return cCPU, nil
 }
 
-func MultiCPUInfo() ([]structs.CPU, error) {
+func MultiCPUInfo() ([]structs.CPUs, error) {
 	c, err := cpu.Info()
 	if err != nil {
 		fmt.Println("Failed fetching CPU Info:", err)
 		return nil, err
 	}
 
-	var cCPUs []structs.CPU
+	var cCPUs []structs.CPUs
 
 	for _, cpu := range c {
-		cCPU := structs.CPU{
-			CPU: cpu.CPU,
+		cCPU := structs.CPUs{
+			CPUCount: cpu.CPU,
 			Family: cpu.Family,
 			Model: cpu.Family,
 			CacheSize: cpu.CacheSize,

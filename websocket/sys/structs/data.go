@@ -18,7 +18,15 @@ type Disk struct {
 }
 
 type CPU struct {
-	CPU			int32		`json:"cpu"`
+	VendorID	string		`json:"vendorId"`
+	Family		string		`json:"family"`
+	ModelName	string		`json:"modelName"`
+	CacheSize	int32		`json:"cacheSize"`
+	Mhz			float64		`json:"mhz"`
+}
+
+type CPUs struct {
+	CPUCount	int32		`json:"cpu"`
 	Family		string		`json:"family"`
 	Model		string		`json:"model"`
 	CacheSize	int32		`json:"cacheSize"`

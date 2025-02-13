@@ -9,7 +9,33 @@ Versioning follows following syntax:
  ⚙️ Patch release | **v0.0.1**  |
 
 ---
-## 🎯 v0.2.0 - RS Client + Server Connection Handling
+## 🎯 v0.2.0 - RS Client Main Page + Server Optimization
+- RS Client UPDATE
+  - Integrated General Stats
+    - Hostname, Uptime, Boot Date, Processes, Kernel Arch
+  - Integrated CPU Stats
+    - Temp, Mhz, Model, Vendor
+  - Integrated Memory Stats
+    - Total, used in percent, available and free memory
+  - Integrated Disk stats
+    - Path, Total, Used, Used in Percent and Filesystem type
+  - Added Pie Chart for Temperature with needle
+  - Conversion Functions for data transformation
+  - Resposnive: Mobile and Small screens are now supported
+  - Bugs
+    - Typos
+    - Missing values in interface
+    - Conversion error
+    - Websocket connection
+    - Local Hosting
+- Websocket Server optimization
+  - Concurrent Websocket Write Bug
+  - Centralized Write via channel
+  - Increased Timeout
+
+**📅 13.02.2025**
+
+## ⚙️ v0.1.5 - RS Client Header + Server Connection Handling
 - Added Main Page of RS Client
   - Currently supported stats integrated
   - React Router v6 Integration
