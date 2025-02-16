@@ -9,7 +9,7 @@ Versioning follows following syntax:
  ⚙️ Patch release | **v0.0.1**  |
 
 ---
-## 🎯 v0.2.0 - RS Client Main Page + Server Optimization
+## 🎯 v0.1.0 - RS Client Main Page + Server Optimization
 - RS Client UPDATE
   - Integrated General Stats
     - Hostname, Uptime, Boot Date, Processes, Kernel Arch
@@ -35,7 +35,7 @@ Versioning follows following syntax:
 
 **📅 13.02.2025**
 
-## ⚙️ v0.1.5 - RS Client Header + Server Connection Handling
+## ⚙️ v0.0.5 - RS Client Header + Server Connection Handling
 - Added Main Page of RS Client
   - Currently supported stats integrated
   - React Router v6 Integration
@@ -50,13 +50,13 @@ Versioning follows following syntax:
 
 **📅 11.02.2025**
 
-## ⚙️ v0.1.3 - Memory & Sensor
+## ⚙️ v0.0.3 - Memory & Sensor
 - Added Memory data to return
 - Added Sensor data to return
 
 **📅 11.02.2025**
 
-## ⚙️ v0.1.2 - Websockets Refactor
+## ⚙️ v0.0.2 - Websockets Refactor
 - Renamed rastats-ui to rs-client
 - Refactored websocket codebase
   - gopsutil pkg migration
@@ -66,14 +66,14 @@ Versioning follows following syntax:
 
 **📅 10.02.2025**
 
-## ⚙️ v0.1.1 - Websockets
+## ⚙️ v0.0.1 - Websockets
 - Migrated onto Golang
 - Setup conn + tested with wscat
 - Basic SysInfo with sys/unix
 
 **📅 06.02.2025**
 
-## 🎯 v0.1.0 - Project Setup
+## 🎯 v0.0.0 - Project Setup
 - Base UI Project (React + Vite + Typescript)
 - Base Python Project
 - Base Structure
